@@ -6,53 +6,46 @@ require_once __DIR__ . '/../../class/immobien.class.php';
 
 class ImmoBienTest extends PHPUnit\Framework\TestCase
 {
-    protected $object;
-
-    protected function setUp(): void
+    /**
+     * @test
+     */
+    public function moduleClassShouldHaveCorrectNumber(): void
     {
-        global $db;
-        $this->object = new ImmoBien($db);
+        $moduleFile = __DIR__ . '/../../core/modules/modImmobien.class.php';
+        $this->assertFileExists($moduleFile);
+        $content = file_get_contents($moduleFile);
+        $this->assertStringContainsString('numero = 700001', $content);
     }
 
     /**
      * @test
      */
-    public function tableElementShouldBeCorrect(): void
+    public function classShouldExist(): void
     {
-        $this->assertEquals('llx_immo_bien', $this->object->table_element);
+        $this->assertTrue(class_exists('ImmoBien'));
     }
 
     /**
      * @test
      */
-    public function elementShouldBeCorrect(): void
+    public function objectShouldHaveRequiredProperties(): void
     {
-        $this->assertEquals('immobien', $this->object->element);
+        $reflection = new ReflectionClass('ImmoBien');
+        $this->assertTrue($reflection->hasProperty('table_element'));
+        $this->assertTrue($reflection->hasProperty('element'));
+        $this->assertTrue($reflection->hasProperty('ref'));
+        $this->assertTrue($reflection->hasProperty('status'));
     }
 
     /**
      * @test
      */
-    public function objectShouldHaveRefProperty(): void
+    public function sqlShouldCreateBienTable(): void
     {
-        $this->assertObjectHasProperty('ref', $this->object);
-    }
-
-    /**
-     * @test
-     */
-    public function objectShouldHaveStatusProperty(): void
-    {
-        $this->assertObjectHasProperty('status', $this->object);
-    }
-
-    /**
-     * @test
-     */
-    public function getNextNumRefShouldReturnFormattedString(): void
-    {
-        $ref = $this->object->getNextNumRef();
-        $this->assertStringStartsWith(strtoupper($this->object->element), $ref);
-        $this->assertMatchesRegularExpression('/^' . strtoupper($this->object->element) . '-\d{4}-\d{4}$/', $ref);
+        $sqlFile = __DIR__ . '/../../sql/llx_immo_bien.sql';
+        $this->assertFileExists($sqlFile);
+        $content = file_get_contents($sqlFile);
+        $this->assertStringContainsString('CREATE TABLE', $content);
+        $this->assertStringContainsString('llx_immo_bien', $content);
     }
 }

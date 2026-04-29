@@ -1,13 +1,8 @@
 # Dolibarr language file — immobien
-ModulemodImmobienName = Immobilier - Biens
-ModulemodImmobienDesc = Gestion des biens immobiliers
-Immobilier = Immobilier
-Biens = Biens
-Clients = Clients
-Location = Location
-Vente = Vente
-Rénovation = Rénovation
-Syndic = Syndic
-ÉtudeDeMarché = Étude de marché
-Paiements = Paiements
-Rapports = Rapports
+ModuleImmobienName=Immobilier - Biens
+ModuleImmobienDesc=Gestion des biens immobiliers
+ImmoBien=Bien immobilier
+ImmoBienNew=Nouveau bien
+ImmoBienList=Liste des biens
+ImmoBienEdit=Éditer le bien
+ImmoBienDelete=Supprimer le bien
