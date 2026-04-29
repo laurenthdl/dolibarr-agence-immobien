@@ -46,8 +46,8 @@ jobs:
 
     - name: Run PHPUnit tests
       run: |
-        if [ -f test/phpunit/ImmobienTest.php ]; then
-          php test/phpunit/ImmobienTest.php
+        if [ -f test/phpunit/ImmoBienTest.php ]; then
+          php test/phpunit/ImmoBienTest.php
         fi
       env:
         DB_TYPE: pgsql
