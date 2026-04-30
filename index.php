@@ -37,7 +37,7 @@ if ($resql) {
         print '<td class="right">' . price($obj->prix_vente) . '</td>';
         print '<td class="center">';
         print '<a href="card.php?action=edit&id=' . $obj->rowid . '">' . img_edit() . '</a> ';
-        print '<a href="' . $_SERVER["PHP_SELF"] . '?action=delete&id=' . $obj->rowid . '&token=' . newToken() . '" onclick="return confirm('Supprimer ce bien ?')">' . img_delete() . '</a>';
+        print '<a href="' . $_SERVER["PHP_SELF"] . '?action=delete&id=' . $obj->rowid . '&token=' . newToken() . '" onclick="return confirm(\'Supprimer ce bien ?\')">' . img_delete() . '</a>';
         print '</td></tr>';
     }
 }
