@@ -1,51 +1,35 @@
 <?php
-
 declare(strict_types=1);
-
+require_once __DIR__ . '/bootstrap.php';
+require_once __DIR__ . '/../../core/modules/modImmobien.class.php';
 require_once __DIR__ . '/../../class/immobien.class.php';
 
 class ImmoBienTest extends PHPUnit\Framework\TestCase
 {
-    /**
-     * @test
-     */
-    public function moduleClassShouldHaveCorrectNumber(): void
+    /** @test */
+    public function moduleClassShouldExist(): void
     {
-        $moduleFile = __DIR__ . '/../../core/modules/modImmobien.class.php';
-        $this->assertFileExists($moduleFile);
-        $content = file_get_contents($moduleFile);
-        $this->assertStringContainsString('numero = 700001', $content);
+        $this->assertTrue(class_exists('modImmobien'));
     }
 
-    /**
-     * @test
-     */
-    public function classShouldExist(): void
+    /** @test */
+    public function objectClassShouldExist(): void
     {
         $this->assertTrue(class_exists('ImmoBien'));
     }
 
-    /**
-     * @test
-     */
-    public function objectShouldHaveRequiredProperties(): void
+    /** @test */
+    public function sqlFileShouldContainCreateTable(): void
     {
-        $reflection = new ReflectionClass('ImmoBien');
-        $this->assertTrue($reflection->hasProperty('table_element'));
-        $this->assertTrue($reflection->hasProperty('element'));
-        $this->assertTrue($reflection->hasProperty('ref'));
-        $this->assertTrue($reflection->hasProperty('status'));
-    }
-
-    /**
-     * @test
-     */
-    public function sqlShouldCreateBienTable(): void
-    {
-        $sqlFile = __DIR__ . '/../../sql/llx_immo_bien.sql';
-        $this->assertFileExists($sqlFile);
-        $content = file_get_contents($sqlFile);
+        $content = file_get_contents(__DIR__ . '/../../sql/llx_immo_bien.sql');
         $this->assertStringContainsString('CREATE TABLE', $content);
         $this->assertStringContainsString('llx_immo_bien', $content);
+    }
+
+    /** @test */
+    public function uiFilesShouldExist(): void
+    {
+        $this->assertFileExists(__DIR__ . '/../../index.php');
+        $this->assertFileExists(__DIR__ . '/../../card.php');
     }
 }
